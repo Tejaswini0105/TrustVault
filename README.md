@@ -1,5 +1,6 @@
 # TrustVault
 
+
 TrustVault is a Flask-based secure document-sharing prototype. It demonstrates authenticated users, per-document read/edit grants, private file storage, revocation, and application audit events.
 
 ## Important security status
@@ -81,3 +82,6 @@ Use a production WSGI server such as Gunicorn, HTTPS, `COOKIE_SECURE=1`, strong 
 - `PROMPTS.md`: honest dated AI usage notes, with real commits and verification
 - `tests/`: automated security tests
 - Five-minute demo video: record only synthetic data
+
+TrustVault is a secure document management and sharing web application developed using Python and Flask. It allows users to register, log in, upload and manage documents, and share files securely with authorized users. The system aims to protect confidential information and provide controlled access to documents 
+>>>>>>> 8b0e2b37046d0a0c4a286de82c09ae6c8947320d
