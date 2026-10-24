@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Share Document | TrustVault{% endblock %}
+
+{% block content %}
+
+<div class="form-card card shadow-sm">
+    <div class="card-body p-4">
+
+        <h2>Grant Document Access</h2>
+
+        <p class="text-muted">
+            Document: <strong>{{ document.title }}</strong>
+        </p>
+
+        <p>
+            Enter the email address of an existing active TrustVault user.
+        </p>
+
+        <form method="POST"
+              action="{{ url_for('share_document', document_id=document.id) }}">
+
+            <input type="hidden"
+                   name="csrf_token"
+                   value="{{ csrf_token() }}">
+
+            <label for="share-email" class="form-label mt-2">
+                User Email
+            </label>
+
+            <input
+                id="share-email"
+                class="form-control"
+                type="email"
+                name="email"
+                required
+                placeholder="user@example.com">
+
+            <label for="share-level" class="form-label mt-3">
+                Permission
+            </label>
+
+            <select id="share-level"
+                    class="form-select"
+                    name="level"
+                    required>
+
+                <option value="read">
+                    Read — can view and download
+                </option>
+
+                <option value="edit">
+                    Edit — can view, download and edit metadata
+                </option>
+
+            </select>
+
+            <button type="submit" class="btn btn-primary mt-4">
+                Grant Access
+            </button>
+
+            <a href="{{ url_for('document_detail', document_id=document.id) }}"
+               class="btn btn-outline-secondary mt-4">
+                Back to Document
+            </a>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

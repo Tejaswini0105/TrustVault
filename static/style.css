@@ -1,0 +1,6 @@
+body { background: #f6f8fb; color: #1f2937; }
+.hero { background: linear-gradient(135deg, #ffffff, #e8f0ff); border: 1px solid #dbe5f5; }
+.card { border: 1px solid #e5eaf1; border-radius: 14px; }
+.form-card { max-width: 620px; }
+.table { vertical-align: middle; }
+code { overflow-wrap: anywhere; }

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | TrustVault{% endblock %}
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+  <div><h1>Dashboard</h1><p class="text-muted mb-0">Only documents you own or have been granted access to are listed.</p></div>
+  {% if current_user.role in ['owner', 'admin'] %}<a class="btn btn-primary" href="{{ url_for('upload_document') }}">Upload document</a>{% endif %}
+</div>
+<div class="card"><div class="table-responsive"><table class="table table-hover mb-0">
+<thead><tr><th>Document</th><th>Category</th><th>Owner</th><th>Uploaded</th><th>Actions</th></tr></thead><tbody>
+{% for doc in documents %}
+<tr><td>{{ doc.title }}</td><td>{{ doc.category }}</td><td>{{ doc.owner.full_name }}</td><td>{{ doc.created_at.strftime('%Y-%m-%d') }}</td>
+<td><a class="btn btn-sm btn-outline-primary" href="{{ url_for('document_detail', document_id=doc.id) }}">Open</a></td></tr>
+{% else %}<tr><td colspan="5" class="text-center text-muted p-4">No documents available. Upload one or ask an owner to share a document with you.</td></tr>{% endfor %}
+</tbody></table></div></div>
+{% endblock %}

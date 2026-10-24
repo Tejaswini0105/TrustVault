@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}TrustVault | Secure documents{% endblock %}
+{% block content %}
+<section class="hero p-5 rounded-4">
+  <span class="badge text-bg-primary mb-3">Private by design</span>
+  <h1 class="display-5 fw-bold">Your documents. Your permissions. Your evidence.</h1>
+  <p class="lead mt-3">A document-sharing platform built around named-user access controls and an audit trail.</p>
+  <a class="btn btn-primary btn-lg me-2" href="{{ url_for('login') }}">Sign in</a>
+  <a class="btn btn-outline-secondary btn-lg" href="{{ url_for('register') }}">Create account</a>
+</section>
+<div class="row g-3 mt-3">
+  <div class="col-md-4"><div class="card h-100"><div class="card-body"><h5>Access control</h5><p>Grant read or edit access to named users.</p></div></div></div>
+  <div class="col-md-4"><div class="card h-100"><div class="card-body"><h5>Private storage</h5><p>Files are stored outside public web directories.</p></div></div></div>
+  <div class="col-md-4"><div class="card h-100"><div class="card-body"><h5>Audit events</h5><p>Record document actions and denied access attempts.</p></div></div></div>
+</div>
+{% endblock %}
