@@ -1,15 +1,197 @@
+
 {% extends "base.html" %}
+
 {% block title %}Dashboard | TrustVault{% endblock %}
+
 {% block content %}
-<div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
-  <div><h1>Dashboard</h1><p class="text-muted mb-0">Only documents you own or have been granted access to are listed.</p></div>
-  {% if current_user.role in ['owner', 'admin'] %}<a class="btn btn-primary" href="{{ url_for('upload_document') }}">Upload document</a>{% endif %}
+
+<!-- Welcome Section -->
+<div class="p-4 p-md-5 mb-4 rounded-4 text-white shadow-sm"
+     style="background: linear-gradient(120deg, #142b62, #315be8);">
+
+    <div class="row align-items-center">
+        <div class="col-md-9">
+            <span class="badge bg-light text-primary mb-3">
+                SECURE DOCUMENT WORKSPACE
+            </span>
+
+            <h1 class="text-white fw-bold">
+                Welcome, {{ current_user.full_name }}!
+            </h1>
+
+            <p class="text-white mb-0">
+                Your documents, organized in one secure place.
+            </p>
+        </div>
+
+        <div class="col-md-3 text-md-end text-center mt-3 mt-md-0">
+            <span style="font-size: 65px;">🔐</span>
+        </div>
+    </div>
 </div>
-<div class="card"><div class="table-responsive"><table class="table table-hover mb-0">
-<thead><tr><th>Document</th><th>Category</th><th>Owner</th><th>Uploaded</th><th>Actions</th></tr></thead><tbody>
-{% for doc in documents %}
-<tr><td>{{ doc.title }}</td><td>{{ doc.category }}</td><td>{{ doc.owner.full_name }}</td><td>{{ doc.created_at.strftime('%Y-%m-%d') }}</td>
-<td><a class="btn btn-sm btn-outline-primary" href="{{ url_for('document_detail', document_id=doc.id) }}">Open</a></td></tr>
-{% else %}<tr><td colspan="5" class="text-center text-muted p-4">No documents available. Upload one or ask an owner to share a document with you.</td></tr>{% endfor %}
-</tbody></table></div></div>
+
+<!-- Page Heading and Upload Button -->
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+
+    <div>
+        <h2 class="fw-bold mb-2">My Documents</h2>
+        <p class="text-muted mb-0">
+            Only documents you own or have been granted access to are listed.
+        </p>
+    </div>
+
+    {% if current_user.role in ['owner', 'admin'] %}
+    <a class="btn btn-primary btn-lg rounded-3"
+       href="{{ url_for('upload_document') }}">
+        + Upload Document
+    </a>
+    {% endif %}
+
+</div>
+
+<!-- Document Summary -->
+<div class="row g-3 mb-4">
+
+    <div class="col-12 col-sm-6 col-lg-4">
+        <div class="card border-0 shadow-sm rounded-4 h-100">
+            <div class="card-body p-4">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="rounded-3 p-3"
+                         style="background: #eaf0ff; font-size: 26px;">
+                        📁
+                    </div>
+
+                    <div>
+                        <p class="text-muted mb-1">Available Documents</p>
+                        <h3 class="fw-bold mb-0">
+                            {{ documents|length }}
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-lg-4">
+        <div class="card border-0 shadow-sm rounded-4 h-100">
+            <div class="card-body p-4">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="rounded-3 p-3"
+                         style="background: #e7f8ef; font-size: 26px;">
+                        🛡️
+                    </div>
+
+                    <div>
+                        <p class="text-muted mb-1">Account Role</p>
+                        <h5 class="fw-bold mb-0 text-capitalize">
+                            {{ current_user.role }}
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Documents Table -->
+<div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+
+    <div class="card-header bg-white border-0 p-4">
+        <h5 class="fw-bold mb-1">Document Library</h5>
+        <p class="text-muted small mb-0">
+            View your available files and document details.
+        </p>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+
+            <thead style="background: #edf2ff;">
+                <tr>
+                    <th class="p-3">Document</th>
+                    <th class="p-3">Category</th>
+                    <th class="p-3">Owner</th>
+                    <th class="p-3">Uploaded</th>
+                    <th class="p-3 text-center">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for doc in documents %}
+                <tr>
+                    <td class="p-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <span style="font-size: 24px;">📄</span>
+                            <div>
+                                <div class="fw-semibold">
+                                    {{ doc.title }}
+                                </div>
+                                <small class="text-muted">
+                                    TrustVault document
+                                </small>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td class="p-3">
+                        <span class="badge rounded-pill bg-light text-dark border">
+                            {{ doc.category }}
+                        </span>
+                    </td>
+
+                    <td class="p-3">
+                        {{ doc.owner.full_name }}
+                    </td>
+
+                    <td class="p-3 text-nowrap">
+                        {{ doc.created_at.strftime('%Y-%m-%d') }}
+                    </td>
+
+                    <td class="p-3 text-center">
+                        <a class="btn btn-sm btn-outline-primary rounded-3 px-3"
+                           href="{{ url_for('document_detail', document_id=doc.id) }}">
+                            Open →
+                        </a>
+                    </td>
+                </tr>
+
+                {% else %}
+                <tr>
+                    <td colspan="5" class="text-center py-5">
+                        <div style="font-size: 50px;">📂</div>
+
+                        <h5 class="fw-bold mt-3">
+                            No Documents Yet
+                        </h5>
+
+                        <p class="text-muted mb-3">
+                            Upload a document or ask an owner to share one with you.
+                        </p>
+
+                        {% if current_user.role in ['owner', 'admin'] %}
+                        <a class="btn btn-primary rounded-3"
+                           href="{{ url_for('upload_document') }}">
+                            Upload Your First Document
+                        </a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+<!-- Security Reminder -->
+<div class="alert mt-4 rounded-4 border-0"
+     style="background: #eaf0ff; color: #203b83;">
+    <strong>🛡️ Security reminder</strong>
+    <p class="mb-0 mt-1">
+        Share documents only with trusted users. Always log out when using
+        a shared computer.
+    </p>
+</div>
+
 {% endblock %}

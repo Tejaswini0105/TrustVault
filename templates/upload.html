@@ -1,13 +1,172 @@
+
 {% extends "base.html" %}
-{% block title %}Upload | TrustVault{% endblock %}
+
+{% block title %}Upload Document | TrustVault{% endblock %}
+
 {% block content %}
-<div class="form-card card shadow-sm"><div class="card-body p-4">
-<h2>Upload a document</h2><p class="text-muted">Maximum 10 MB. Allowed types: PDF, TXT, PNG, JPG, DOCX, XLSX, CSV.</p>
-<form method="post" enctype="multipart/form-data">
-<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-<label class="form-label mt-2">Document title</label><input class="form-control" name="title" maxlength="255" required>
-<label class="form-label mt-3">Category</label><select class="form-select" name="category"><option>General</option><option>Contract</option><option>Salary</option><option>Audit</option><option>Design</option><option>Report</option></select>
-<label class="form-label mt-3">File</label><input class="form-control" type="file" name="file" required>
-<button class="btn btn-primary mt-4">Upload securely</button>
-</form></div></div>
+
+<div class="container py-4">
+
+    <!-- Page Heading -->
+    <div class="mb-4">
+        <a href="{{ url_for('dashboard') }}"
+           class="text-decoration-none text-muted">
+            ← Back to Dashboard
+        </a>
+
+        <h1 class="fw-bold mt-3 mb-2">Upload Document</h1>
+
+        <p class="text-muted">
+            Add your important documents to your TrustVault workspace.
+        </p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-9 col-xl-8">
+
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+
+                <!-- Card Header -->
+                <div class="p-4 text-white"
+                     style="background: linear-gradient(120deg, #142b62, #315be8);">
+
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="rounded-3 p-3"
+                             style="background: rgba(255,255,255,0.15); font-size: 30px;">
+                            📁
+                        </div>
+
+                        <div>
+                            <h4 class="text-white fw-bold mb-1">
+                                Add a New Document
+                            </h4>
+
+                            <p class="text-white mb-0">
+                                Enter the details and select your file.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upload Form -->
+                <div class="card-body p-4 p-md-5">
+
+                    <div class="alert alert-info border-0 rounded-3">
+                        <strong>📌 File requirements</strong>
+                        <p class="mb-1 mt-2">
+                            Maximum file size: 10 MB
+                        </p>
+                        <p class="mb-0">
+                            Allowed types: PDF, TXT, PNG, JPG, DOCX, XLSX, CSV
+                        </p>
+                    </div>
+
+                    <form method="post"
+                          enctype="multipart/form-data">
+
+                        <input type="hidden"
+                               name="csrf_token"
+                               value="{{ csrf_token() }}">
+
+                        <!-- Document Title -->
+                        <div class="mb-4">
+                            <label for="title"
+                                   class="form-label fw-semibold">
+                                Document Title
+                            </label>
+
+                            <input type="text"
+                                   class="form-control form-control-lg rounded-3"
+                                   id="title"
+                                   name="title"
+                                   maxlength="255"
+                                   placeholder="Example: Project Report"
+                                   required>
+                        </div>
+
+                        <!-- Category -->
+                        <div class="mb-4">
+                            <label for="category"
+                                   class="form-label fw-semibold">
+                                Document Category
+                            </label>
+
+                            <select class="form-select form-select-lg rounded-3"
+                                    id="category"
+                                    name="category"
+                                    required>
+
+                                <option value="General">General</option>
+                                <option value="Contract">Contract</option>
+                                <option value="Salary">Salary</option>
+                                <option value="Audit">Audit</option>
+                                <option value="Design">Design</option>
+                                <option value="Report">Report</option>
+
+                            </select>
+                        </div>
+
+                        <!-- File Selection -->
+                        <div class="mb-4">
+                            <label for="file"
+                                   class="form-label fw-semibold">
+                                Choose Document
+                            </label>
+
+                            <input class="form-control form-control-lg rounded-3"
+                                   type="file"
+                                   id="file"
+                                   name="file"
+                                   accept=".pdf,.txt,.png,.jpg,.jpeg,.docx,.xlsx,.csv"
+                                   required>
+
+                            <div class="form-text">
+                                Select a supported file from your computer.
+                            </div>
+                        </div>
+
+                        <!-- Security Note -->
+                        <div class="p-3 rounded-3 mb-4"
+                             style="background: #eef4ff;">
+
+                            <div class="d-flex gap-2 align-items-start">
+                                <span style="font-size: 23px;">🛡️</span>
+
+                                <div>
+                                    <strong class="d-block">
+                                        Secure Document Management
+                                    </strong>
+
+                                    <small class="text-muted">
+                                        Upload only files you are authorized to store.
+                                        Follow your application's sharing and access rules.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="d-flex flex-wrap gap-2">
+
+                            <button type="submit"
+                                    class="btn btn-primary btn-lg rounded-3 px-4">
+                                🔒 Upload Securely
+                            </button>
+
+                            <a href="{{ url_for('dashboard') }}"
+                               class="btn btn-outline-secondary btn-lg rounded-3 px-4">
+                                Cancel
+                            </a>
+
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 {% endblock %}

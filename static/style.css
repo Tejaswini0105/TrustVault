@@ -1,6 +1,276 @@
-body { background: #f6f8fb; color: #1f2937; }
-.hero { background: linear-gradient(135deg, #ffffff, #e8f0ff); border: 1px solid #dbe5f5; }
-.card { border: 1px solid #e5eaf1; border-radius: 14px; }
-.form-card { max-width: 620px; }
-.table { vertical-align: middle; }
-code { overflow-wrap: anywhere; }
+
+/* TrustVault - Professional Website Design */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --primary: #2347d5;
+    --primary-dark: #1836ad;
+    --navy: #101c3a;
+    --background: #f5f7fc;
+    --white: #ffffff;
+    --text: #202b43;
+    --muted: #718096;
+    --border: #e2e8f0;
+    --success: #16845b;
+    --radius: 14px;
+    --shadow: 0 8px 28px rgba(20, 40, 90, 0.08);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', Arial, sans-serif;
+    background: var(--background);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+a:hover {
+    color: var(--primary-dark);
+}
+
+h1, h2, h3 {
+    color: var(--navy);
+    line-height: 1.25;
+}
+
+h1 {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 800;
+}
+
+h2 {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+p {
+    color: var(--muted);
+}
+
+/* Navigation */
+
+nav, .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 18px 7%;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+}
+
+.logo, .brand {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+nav a, .navbar a {
+    margin: 0 8px;
+    font-weight: 600;
+}
+
+/* Main content */
+
+main, .container {
+    width: min(1100px, 90%);
+    margin: 40px auto;
+}
+
+.hero {
+    padding: 65px 30px;
+    text-align: center;
+    background: linear-gradient(135deg, #eaf0ff, #ffffff);
+    border-radius: 22px;
+}
+
+.hero p {
+    max-width: 650px;
+    margin: 16px auto 25px;
+    font-size: 17px;
+}
+
+/* Cards and forms */
+
+.card, .form-container, .auth-card, .upload-card {
+    background: var(--white);
+    padding: 30px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.form-container, .auth-card {
+    width: min(460px, 92%);
+    margin: 45px auto;
+}
+
+label {
+    display: block;
+    margin: 14px 0 7px;
+    color: var(--text);
+    font-weight: 600;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 13px 14px;
+    margin-bottom: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    background: #ffffff;
+    color: var(--text);
+    font: inherit;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(35, 71, 213, 0.12);
+}
+
+/* Buttons */
+
+button, .btn, input[type="submit"] {
+    display: inline-block;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 9px;
+    background: var(--primary);
+    color: var(--white);
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+button:hover, .btn:hover, input[type="submit"]:hover {
+    background: var(--primary-dark);
+    color: var(--white);
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: var(--white);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+}
+
+/* Dashboard and document lists */
+
+.dashboard-grid, .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+    margin-top: 25px;
+}
+
+.document-card, .dashboard-card {
+    background: var(--white);
+    padding: 23px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: 0.2s ease;
+}
+
+.document-card:hover, .dashboard-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(20, 40, 90, 0.12);
+}
+
+.document-card h3, .dashboard-card h3 {
+    margin-top: 0;
+}
+
+/* Tables */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+th, td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+th {
+    background: #edf2ff;
+    color: var(--navy);
+}
+
+/* Status and messages */
+
+.success, .alert-success {
+    padding: 12px 16px;
+    border-radius: 9px;
+    background: #e7f8ef;
+    color: var(--success);
+}
+
+.error, .alert-danger {
+    padding: 12px 16px;
+    border-radius: 9px;
+    background: #fff0f0;
+    color: #b42318;
+}
+
+/* Footer */
+
+footer {
+    padding: 25px;
+    text-align: center;
+    color: var(--muted);
+}
+
+/* Mobile responsive design */
+
+@media (max-width: 600px) {
+    nav, .navbar {
+        padding: 16px 5%;
+        gap: 12px;
+    }
+
+    main, .container {
+        width: 92%;
+        margin: 25px auto;
+    }
+
+    .hero {
+        padding: 40px 18px;
+    }
+
+    .card, .form-container, .auth-card, .upload-card {
+        padding: 22px;
+    }
+
+    h1 {
+        font-size: 29px;
+    }
+
+    table {
+        font-size: 13px;
+    }
+
+    th, td {
+        padding: 10px;
+    }
+}
